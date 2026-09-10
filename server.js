@@ -1,5 +1,6 @@
 const fs=require('fs');
 const http=require('http');
+const next=require('next');
 const path=require('path');
 const crypto=require('crypto');
 const envFile=path.join(process.cwd(),'.env');
@@ -21,8 +22,9 @@ const pinterest=require('./app/providers/pinterestOAuth');
 const {searchWeb}=require('./app/providers/search');
 const {generateJSON}=require('./app/providers/ai');
 const {fetchXAccounts}=require('./app/providers/x');
-const PORT=Number(process.env.PORT||3001);
-const FRONTEND_ORIGIN=String(process.env.ORVIA_PUBLIC_URL||'http://localhost:3000').replace(/\/$/,'');
+const PORT=Number(process.env.PORT||3000);
+const FRONTEND_ORIGIN=String(process.env.ORVIA_PUBLIC_URL||`http://localhost:${PORT}`).replace(/\/$/,'');
+const NEXT_DEV=process.env.NODE_ENV!=='production';
 const publicDir=path.join(process.cwd(),'public');
 let activeRun=false,publisherBusy=false,automationBusy=false;
 function now(){return new Date().toISOString()}
@@ -83,7 +85,7 @@ async function handler(req,res){
    if(req.method==='GET'&&url===`/api/publishing/${slug}/callback`){const er=u.searchParams.get('error');if(er)return redirect(res,'/?connect_error='+encodeURIComponent(u.searchParams.get('error_description')||er));try{const r=await provider.exchangeCode(u.searchParams.get('code')||'',u.searchParams.get('state')||'');notify(`${r.platform||slug} connected`,`The ${r.platform||slug} account is ready for Orvia.`, 'success',{source:'CONNECTIONS'});return redirect(res,`/?connected=${slug}`)}catch(e){return redirect(res,'/?connect_error='+encodeURIComponent(e.message))}}
  }
  if(req.method==='GET'&&url==='/api/publishing/x/status')return json(res,200,{...xOAuth.status(),envTokenConfigured:Boolean(process.env.X_USER_ACCESS_TOKEN||process.env.X_ACCESS_TOKEN)});
- if(req.method==='GET'&&url==='/api/health')return json(res,200,{ok:true,service:'orvia',version:'2.0.0',time:now(),machineActive:db.read().settings?.machineActive!==false});
+ if(req.method==='GET'&&url==='/api/health')return json(res,200,{ok:true,service:'orvia',version:'2.0.2',time:now(),machineActive:db.read().settings?.machineActive!==false});
  if(req.method==='GET'&&url==='/api/state')return json(res,200,publicState());
  if(req.method==='GET'&&url==='/api/notifications'){const d=db.read();return json(res,200,{items:d.notifications,unread:d.notifications.filter(x=>!x.read).length})}
  if(req.method==='POST'&&url==='/api/notifications/read'){const p=await body(req);if(p.id)db.markNotificationRead(p.id);else db.markAllNotificationsRead();return json(res,200,{ok:true})}
@@ -133,7 +135,22 @@ async function handler(req,res){
  // Backend is intentionally API-only in the Next.js transition.
  if (url === '/' || !url.startsWith('/api/')) return json(res,404,{error:'Not found'});
 }
-async function maybeWeeklyNotification(){const d=db.read(),n=d.settings?.notifications||{};if(!n.weekly||n.enabled===false)return;const last=d.settings?.lastWeeklyNotificationAt?new Date(d.settings.lastWeeklyNotificationAt).getTime():0;if(last&&Date.now()-last<7*24*60*60*1000)return;const l=deriveLearning(d);const summary=l.totals?`${l.totals.impressions.toLocaleString()} impressions · ${l.totals.engagements.toLocaleString()} engagements · ${l.totals.conversions.toLocaleString()} conversions recorded.`:'No performance evidence has been recorded yet.';db.updateSettings({lastWeeklyNotificationAt:now()});db.addNotification({title:'Weekly growth summary',description:summary,kind:'info',source:'GROWTH',category:'weekly'});} http.createServer((req,res)=>handler(req,res).catch(e=>{console.error('[server]',e);json(res,500,{error:e.message||'Server error'})})).listen(PORT,()=>console.log(`Orvia API running at http://localhost:${PORT} · frontend ${FRONTEND_ORIGIN}`));
+async function maybeWeeklyNotification(){const d=db.read(),n=d.settings?.notifications||{};if(!n.weekly||n.enabled===false)return;const last=d.settings?.lastWeeklyNotificationAt?new Date(d.settings.lastWeeklyNotificationAt).getTime():0;if(last&&Date.now()-last<7*24*60*60*1000)return;const l=deriveLearning(d);const summary=l.totals?`${l.totals.impressions.toLocaleString()} impressions · ${l.totals.engagements.toLocaleString()} engagements · ${l.totals.conversions.toLocaleString()} conversions recorded.`:'No performance evidence has been recorded yet.';db.updateSettings({lastWeeklyNotificationAt:now()});db.addNotification({title:'Weekly growth summary',description:summary,kind:'info',source:'GROWTH',category:'weekly'});} async function startOrvia() {
+ const nextApp=next({dev:NEXT_DEV,port:PORT});
+ const nextHandler=nextApp.getRequestHandler();
+ await nextApp.prepare();
+ const server=http.createServer((req,res)=>{
+   const pathname=new URL(req.url||'/',`http://localhost:${PORT}`).pathname;
+   if(pathname.startsWith('/api/')){
+     handler(req,res).catch(e=>{console.error('[server]',e);json(res,500,{error:e.message||'Server error'})});
+     return;
+   }
+   nextHandler(req,res);
+ });
+ server.listen(PORT,()=>console.log(`Orvia running at http://localhost:${PORT} · public ${FRONTEND_ORIGIN} · mode ${NEXT_DEV?'development':'production'}`));
+ return server;
+}
+startOrvia().catch(error=>{console.error('[startup]',error);process.exit(1)});
 setInterval(processScheduled,15000);setInterval(refreshPublishedMetrics,60000);setInterval(maybeWeeklyNotification,60*60*1000);
 async function autonomousTick(force=false){if(automationBusy)return;const c=getConfig(),s=db.read().settings||{};if(s.machineActive===false||c.automation.enabled===false)return;const intervalMs=Number(c.automation.cycleMinutes||30)*60000,last=s.lastAutoCycleAt?new Date(s.lastAutoCycleAt).getTime():0;if(!force&&last&&Date.now()-last<intervalMs)return;automationBusy=true;try{await autonomousCycle(c)}catch(e){console.error('[autonomous]',e.message)}finally{automationBusy=false}}
 const automationPollMs=Math.min(60000,Math.max(15000,Number(getConfig().automation.cycleMinutes||30)*60000/6));setInterval(()=>autonomousTick(false),automationPollMs);setTimeout(()=>{processScheduled();refreshPublishedMetrics();autonomousTick(true);maybeWeeklyNotification()},3000);

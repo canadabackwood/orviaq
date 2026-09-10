@@ -1,15 +1,12 @@
 {
   "name": "orvia-media-instrument",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "private": true,
-  "description": "Orvia Media Operation \u2014 intelligence, content, distribution, scheduling, publishing, analytics and learning loop.",
+  "description": "Orvia Media Operation — intelligence, content, distribution, scheduling, publishing, analytics and learning loop.",
   "scripts": {
-    "dev": "node scripts/run-orvia.mjs",
-    "next:dev": "next dev -p 3000",
-    "backend": "node server.js",
+    "dev": "node server.js",
     "build": "next build",
-    "start": "node scripts/run-orvia.mjs",
-    "next:start": "next start -p 3000"
+    "start": "node server.js"
   },
   "engines": {
     "node": ">=20"

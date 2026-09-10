@@ -1,4 +1,4 @@
 @echo off
 setlocal
 cd /d "%~dp0"
-node scripts\run-orvia.js
+node server.js
