@@ -1,0 +1,37 @@
+@import "../../public/legacy/styles.css";
+
+html,
+body {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+}
+
+.next-boot {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  background: #0b0b0d;
+  color: rgba(255,255,255,.72);
+  font: 500 13px/1.5 Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+.next-boot-mark {
+  display: grid;
+  gap: 10px;
+  justify-items: center;
+}
+
+.next-boot-mark::before {
+  content: "";
+  width: 24px;
+  height: 24px;
+  border: 1px solid rgba(255,255,255,.2);
+  border-top-color: rgba(255,255,255,.8);
+  border-radius: 50%;
+  animation: orviaBootSpin .8s linear infinite;
+}
+
+@keyframes orviaBootSpin { to { transform: rotate(360deg); } }

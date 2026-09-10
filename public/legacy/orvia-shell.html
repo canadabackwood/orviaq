@@ -1,0 +1,67 @@
+<div class="notification-stack" id="notificationStack" aria-live="polite" aria-atomic="false"></div>
+<div class="app-shell">
+  <aside class="sidebar glass-panel">
+    <div class="brand"><div class="brand-mark" aria-hidden="true"><span class="orvia-glyph"></span></div><div><b>orvia</b><small>Media instrument</small></div></div>
+    <nav aria-label="Primary navigation">
+      <button class="nav-item active" data-view="home"><span class="nav-icon">⌂</span><span>Home</span></button>
+      <button class="nav-item" data-view="intelligence"><span class="nav-icon">✦</span><span>Intelligence</span></button>
+      <button class="nav-item" data-view="content"><span class="nav-icon">▱</span><span>Content</span></button>
+      <button class="nav-item" data-view="distribution"><span class="nav-icon">↗</span><span>Distribution</span></button>
+      <button class="nav-item" data-view="growth"><span class="nav-icon">⌁</span><span>Growth</span></button>
+      <button class="nav-item" data-view="revenue"><span class="nav-icon">$</span><span>Revenue</span></button>
+      <button class="nav-item" data-view="library"><span class="nav-icon">▤</span><span>Library</span></button>
+      <button class="nav-item settings" data-view="settings"><span class="nav-icon">⚙</span><span>Settings</span></button>
+    </nav>
+    <div class="sidebar-bottom">
+      <button class="machine-card" id="machineSide" aria-pressed="false"><span class="machine-orb"><i></i></span><span class="machine-copy"><b>Instrument is <strong id="machineWord">Active</strong></b><small id="machineSub">Scanning · researching · creating</small></span><span class="chevron">›</span></button>
+      <div class="creator-card"><div class="avatar">C</div><span><b>Creator</b><small>Pro Plan</small></span><span class="chevron">›</span></div>
+    </div>
+  </aside>
+
+  <main class="workspace">
+    <header class="topbar">
+      <div class="search glass-panel"><span class="search-icon">⌕</span><input id="search" aria-label="Search" placeholder="Search opportunities, content, or anything…"><kbd>⌘ K</kbd></div>
+      <div class="top-actions"><button id="notificationButton" class="icon-button glass-panel notification-button" aria-label="Open notifications"><span>◒</span><i id="notificationBadge" class="notification-badge hidden">0</i></button><button id="theme" class="icon-button glass-panel" aria-label="Toggle theme"><span id="themeIcon">☾</span></button><button class="icon-button glass-panel" aria-label="More options">•••</button><button class="profile-button">C</button></div>
+    </header>
+
+    <div class="dashboard">
+      <section class="hero">
+        <div class="hero-copy"><small class="eyebrow">ORVIA MEDIA OPERATION</small><h1>Your media operation<br><span>is in motion.</span></h1><p>Signals become direction. Direction becomes media. Distribution creates evidence. Performance shapes what comes next.</p><div class="hero-actions"><button id="run" class="primary-button"><span>Run intelligence cycle</span></button><button id="contentBtn" class="secondary-button">Open content factory <span>→</span></button></div></div>
+        <div class="machine-state glass-panel"><div class="state-orb"><span></span></div><div class="state-title"><i></i><b id="stateTitle">Operation active</b></div><p id="stateText">Listening for signals, shaping media and learning from what reaches people.</p><div class="agent-strip"><span>Scout <strong id="scoutStatus">Ready</strong></span><span>Research <strong id="researchStatus">Ready</strong></span><span>Factory <strong id="strategyStatus">Ready</strong></span></div></div>
+      </section>
+
+      <section class="metrics">
+        <article class="metric-card glass-panel"><span class="metric-label"><i>✧</i> Opportunities</span><div><strong id="oppCount">0</strong><em id="oppDelta">—</em></div><small>ranked by Orvia</small></article>
+        <article class="metric-card glass-panel"><span class="metric-label"><i>↗</i> Distribution</span><div><strong id="distributionCount">0</strong><em id="distributionState">QUEUE</em></div><small>approved packages</small></article>
+        <article class="metric-card glass-panel"><span class="metric-label"><i>⌁</i> Reach</span><div><strong id="reachCount">0</strong><em id="engagementRate">—</em></div><small>recorded impressions</small></article>
+        <article class="metric-card glass-panel revenue-card"><span class="metric-label"><i>$</i> Revenue</span><div><strong id="revenueCount">$0</strong></div><small id="revenueSub">waiting for monetization signals</small></article>
+      </section>
+
+      <section class="lower-grid">
+        <section class="opportunity-panel glass-panel">
+          <div class="section-heading"><div><small class="eyebrow">OPPORTUNITY ENGINE</small><h2>Today's strongest signals</h2><p>Fresh opportunities ranked by relevance, recency and evidence.</p></div><button class="quiet-button" id="viewAll">View all <span>→</span></button></div>
+          <div class="opportunity-grid" id="cards"></div>
+        </section>
+        <aside class="activity-panel glass-panel"><div class="section-heading compact"><div><small class="eyebrow">SYSTEM</small><h2>Live Activity</h2></div><button class="log-filter" id="logFilter">Engine log <span>⌄</span></button></div><div class="activity-list" id="activityList"></div></aside>
+      </section>
+
+      <section class="bottom-strip">
+        <button class="pipeline glass-panel" id="pipelineBtn"><span class="pipeline-icon">▱</span><span><b>Content Pipeline</b><small>Opportunity → brief → draft → repurpose → QA → approval.</small></span><strong>Open Factory <span>→</span></strong></button>
+        <section class="platform glass-panel"><div class="platform-heading"><div><small class="eyebrow">MEDIA ECOSYSTEM</small><h2>Platform Status</h2></div><span class="system-dot"><i></i>Operational</span></div><div class="platform-list"><span><i>◎</i> Web Search <strong id="webStatus">Not configured</strong></span><span><i>𝕏</i> X API <strong id="xStatus">Optional</strong></span><span><i>✦</i> Intelligence <strong id="aiStatus">Fallback</strong></span><span><i>▤</i> Local DB <strong>Active</strong></span></div></section>
+      </section>
+    </div>
+  </main>
+</div>
+
+<div class="notification-center" id="notificationCenter" aria-hidden="true">
+  <div class="notification-center-backdrop" id="notificationCenterBackdrop"></div>
+  <section class="notification-center-panel glass-panel" role="dialog" aria-modal="true" aria-labelledby="notificationCenterTitle">
+    <header class="notification-center-head"><div><small class="eyebrow">ORVIA</small><h2 id="notificationCenterTitle">Notifications</h2><p>What Orvia has done, noticed or needs you to see.</p></div><div class="notification-center-actions"><button class="mini-button" id="notificationMarkAll">Mark all read</button><button class="modal-close" id="notificationCenterClose">×</button></div></header>
+    <div class="notification-center-list" id="notificationCenterList"></div>
+  </section>
+</div>
+
+<div class="modal" id="factoryModal" aria-hidden="true"><div class="modal-card glass-panel" role="dialog" aria-modal="true" aria-labelledby="factoryTitle"><button class="modal-close" id="closeFactory">×</button><div class="modal-head"><div><small class="eyebrow">ORVIA CONTENT FACTORY</small><h2 id="factoryTitle">Turn an opportunity into media.</h2><p>Build, review and route platform-native packages without losing the evidence behind them.</p></div><div class="factory-orb"><span>✦</span></div></div><div class="factory-layout"><div class="factory-sidebar"><div class="factory-sidebar-head"><span>OPPORTUNITIES</span><strong id="factoryCount">0</strong></div><div class="factory-opps" id="factoryOpps"></div></div><div class="factory-output" id="factoryOutput"><div class="empty-state"><span class="empty-icon">✦</span><b>Select an opportunity</b><small>The generated package will appear here.</small></div></div></div></div></div>
+
+<div class="modal" id="operationModal" aria-hidden="true"><div class="operation-card glass-panel" role="dialog" aria-modal="true"><button class="modal-close" id="closeOperation">×</button><div class="operation-head"><div><small class="eyebrow" id="operationEyebrow">ORVIA</small><h2 id="operationTitle">Distribution</h2><p id="operationSubtitle">Move approved media into a controlled publishing queue.</p></div><span class="operation-status" id="operationStatus">Operational</span></div><div id="operationBody" class="operation-body"></div></div></div>
+<script src="app.js"></script>

@@ -1,0 +1,199 @@
+{
+  "opportunities": [],
+  "signals": [],
+  "runs": [
+    {
+      "id": "1263626d-bceb-40f4-8cab-aa3585b22122",
+      "createdAt": "2026-09-10T03:23:06.676Z",
+      "durationMs": 1,
+      "signals": 0,
+      "opportunities": 0,
+      "status": "completed",
+      "warnings": [],
+      "events": [
+        {
+          "agent": "SCOUT",
+          "title": "Discovery complete",
+          "description": "0 ranked signals · 1ms",
+          "status": "success",
+          "at": "2026-09-10T03:23:06.676Z"
+        },
+        {
+          "agent": "RESEARCHER",
+          "title": "Evidence complete",
+          "description": "0 opportunities grounded",
+          "status": "success",
+          "at": "2026-09-10T03:23:06.676Z"
+        },
+        {
+          "agent": "ORVIA BRAIN",
+          "title": "Strategy ranked",
+          "description": "0 opportunities scored and structured",
+          "status": "success",
+          "at": "2026-09-10T03:23:06.676Z"
+        },
+        {
+          "agent": "ORVIA",
+          "title": "Cycle complete",
+          "description": "0 opportunities ready",
+          "status": "success",
+          "at": "2026-09-10T03:23:06.676Z"
+        }
+      ]
+    },
+    {
+      "id": "456d28f3-d27a-4309-b5eb-04b382e2d245",
+      "createdAt": "2026-09-10T01:41:06.109Z",
+      "durationMs": 1,
+      "signals": 0,
+      "opportunities": 0,
+      "status": "completed",
+      "warnings": [],
+      "events": [
+        {
+          "agent": "SCOUT",
+          "title": "Discovery complete",
+          "description": "0 ranked signals · 1ms",
+          "status": "success",
+          "at": "2026-09-10T01:41:06.109Z"
+        },
+        {
+          "agent": "RESEARCHER",
+          "title": "Evidence complete",
+          "description": "0 opportunities grounded",
+          "status": "success",
+          "at": "2026-09-10T01:41:06.109Z"
+        },
+        {
+          "agent": "ORVIA BRAIN",
+          "title": "Strategy ranked",
+          "description": "0 opportunities scored and structured",
+          "status": "success",
+          "at": "2026-09-10T01:41:06.109Z"
+        },
+        {
+          "agent": "ORVIA",
+          "title": "Cycle complete",
+          "description": "0 opportunities ready",
+          "status": "success",
+          "at": "2026-09-10T01:41:06.109Z"
+        }
+      ]
+    },
+    {
+      "id": "ebeab242-e861-4cce-99a1-da3b6ddcf934",
+      "createdAt": "2026-09-10T01:40:56.022Z",
+      "durationMs": 1,
+      "signals": 0,
+      "opportunities": 0,
+      "status": "completed",
+      "warnings": [],
+      "events": [
+        {
+          "agent": "SCOUT",
+          "title": "Discovery complete",
+          "description": "0 ranked signals · 1ms",
+          "status": "success",
+          "at": "2026-09-10T01:40:56.022Z"
+        },
+        {
+          "agent": "RESEARCHER",
+          "title": "Evidence complete",
+          "description": "0 opportunities grounded",
+          "status": "success",
+          "at": "2026-09-10T01:40:56.022Z"
+        },
+        {
+          "agent": "ORVIA BRAIN",
+          "title": "Strategy ranked",
+          "description": "0 opportunities scored and structured",
+          "status": "success",
+          "at": "2026-09-10T01:40:56.022Z"
+        },
+        {
+          "agent": "ORVIA",
+          "title": "Cycle complete",
+          "description": "0 opportunities ready",
+          "status": "success",
+          "at": "2026-09-10T01:40:56.022Z"
+        }
+      ]
+    }
+  ],
+  "content": [],
+  "distribution": [],
+  "analytics": [],
+  "learnings": [],
+  "revenue": [],
+  "notifications": [],
+  "mediaAssets": [],
+  "settings": {
+    "timezone": "Africa/Lagos",
+    "machineActive": true,
+    "autonomousMode": true,
+    "autoApproveContent": true,
+    "autoPublish": true,
+    "lastAutoCycleAt": "2026-09-10T03:23:06.673Z",
+    "nextAutoCycleAt": "2026-09-10T03:53:06.677Z",
+    "lastAutoStatus": "completed",
+    "profile": {
+      "name": "",
+      "tagline": "",
+      "bio": "",
+      "website": "",
+      "location": "",
+      "languages": [
+        "English"
+      ]
+    },
+    "strategy": {
+      "primaryTopics": [],
+      "secondaryTopics": [],
+      "avoidTopics": [],
+      "formats": [
+        "X",
+        "YouTube",
+        "Instagram",
+        "TikTok",
+        "LinkedIn",
+        "Threads",
+        "Pinterest"
+      ],
+      "contentMix": {
+        "news": 35,
+        "education": 30,
+        "opinion": 20,
+        "stories": 15
+      }
+    },
+    "preferences": {
+      "defaultDestinations": [
+        "X",
+        "LinkedIn",
+        "Threads"
+      ],
+      "reviewMode": "autonomous",
+      "adaptiveScheduling": true,
+      "crossPlatformAdaptation": true,
+      "duplicateProtection": true
+    },
+    "notifications": {
+      "enabled": true,
+      "publishing": true,
+      "failures": true,
+      "machine": true,
+      "weekly": false,
+      "connections": true,
+      "quietHours": false,
+      "quietStart": "22:00",
+      "quietEnd": "07:00"
+    },
+    "media": {
+      "assetBaseUrl": "",
+      "defaultImageUrl": "",
+      "defaultVideoUrl": ""
+    },
+    "connections": {},
+    "runtime": {}
+  }
+}
